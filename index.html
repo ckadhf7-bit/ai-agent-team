@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>팀 관제실 — AI 에이전트 팀 소개</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --panel: #171e26;
+      --line: #2a3542;
+      --text: #e6edf3;
+      --muted: #9aa7b4;
+      --accent: #4fc3a1;
+      --lock: #f0b45a;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+    section { padding: 56px 0; border-top: 1px solid var(--line); }
+    h1, h2, h3 { line-height: 1.3; margin: 0; }
+    h2 { font-size: 1.5rem; margin-bottom: 24px; }
+    h1 .num, h2 .num { color: var(--accent); font-variant-numeric: tabular-nums; margin-right: 8px; }
+    .nobr { white-space: nowrap; }
+
+    /* 1. 머리말 */
+    header.hero { padding: 88px 0 72px; }
+    .hero h1 { font-size: clamp(1.9rem, 5vw, 3rem); }
+    .hero .lead { font-size: clamp(1.1rem, 2.6vw, 1.4rem); color: var(--muted); margin: 20px 0 0; }
+
+    /* 2. 팀원 카드 */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      list-style: none; padding: 0; margin: 0;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .card h3 { font-size: 1.25rem; }
+    .card .role { color: var(--muted); margin: 6px 0 16px; }
+    .card dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: .95rem; }
+    .card dt { color: var(--muted); }
+    .card dd { margin: 0; }
+    .vacancy {
+      margin: 20px 0 0;
+      padding: 14px 18px;
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      color: var(--muted);
+    }
+
+    /* 3. 일하는 방식 */
+    .flow {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+      list-style: none; padding: 0; margin: 0 0 32px;
+    }
+    .flow li {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 16px;
+      white-space: nowrap;
+    }
+    .flow li.lock { border-color: var(--lock); color: var(--lock); }
+    .flow li.done { border-color: var(--accent); color: var(--accent); }
+    .flow .arrow { background: none; border: 0; padding: 0; color: var(--muted); }
+    .principles { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+    .principles li {
+      background: var(--panel);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      padding: 14px 18px;
+      font-size: 1.05rem;
+    }
+
+    /* 4. 기록 */
+    .timeline { list-style: none; padding: 0; margin: 0; position: relative; }
+    .timeline::before {
+      content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px;
+      width: 2px; background: var(--line);
+    }
+    .timeline li { position: relative; padding: 0 0 20px 32px; }
+    .timeline li:last-child { padding-bottom: 0; }
+    .timeline li::before {
+      content: ""; position: absolute; left: 0; top: 6px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--bg); border: 2px solid var(--accent);
+    }
+    .timeline .note { display: block; color: var(--muted); font-size: .92rem; }
+
+    /* 5. 목적 */
+    .goals {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px; list-style: none; padding: 0; margin: 0;
+    }
+    .goals li {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      font-weight: 600;
+    }
+
+    footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: .9rem; }
+
+    @media (max-width: 600px) {
+      section { padding: 40px 0; }
+      header.hero { padding: 56px 0 48px; }
+      .wrap { padding: 0 16px; }
+      .cards { grid-template-columns: 1fr; }
+      /* 모바일: 칸반 흐름을 세로로 */
+      .flow { flex-direction: column; align-items: stretch; }
+      .flow li { text-align: center; }
+      .flow .arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. 머리말 -->
+  <header class="hero">
+    <div class="wrap">
+      <h1><span class="num">01</span>팀 관제실 — AI 에이전트 <span class="nobr">팀 소개</span></h1>
+      <p class="lead">사람은 결정하고, 에이전트들은 일합니다</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2. 팀원 카드 -->
+    <section id="team" aria-labelledby="team-title">
+      <div class="wrap">
+        <h2 id="team-title"><span class="num">02</span>팀원</h2>
+        <ul class="cards">
+          <li class="card">
+            <h3>피엠</h3>
+            <p class="role">PM·관제탑·검수</p>
+            <dl><dt>동력</dt><dd>Muse</dd><dt>비용</dt><dd>추가 없음</dd></dl>
+          </li>
+          <li class="card">
+            <h3>헤르메스</h3>
+            <p class="role">상주 비서 (접수·루틴·전령)</p>
+            <dl><dt>동력</dt><dd>로컬 모델 올라마</dd><dt>비용</dt><dd>무료</dd></dl>
+          </li>
+          <li class="card">
+            <h3>올라마</h3>
+            <p class="role">로컬 두뇌</p>
+            <dl><dt>동력</dt><dd>맥 로컬 실행</dd><dt>비용</dt><dd>무료</dd></dl>
+          </li>
+          <li class="card">
+            <h3>제미나이</h3>
+            <p class="role">수집</p>
+            <dl><dt>동력</dt><dd>API 무료 등급</dd><dt>비용</dt><dd>무료</dd></dl>
+          </li>
+          <li class="card">
+            <h3>특파원들</h3>
+            <p class="role">소집형 전문가 (클로드·제미나이 웹)</p>
+            <dl><dt>동력</dt><dd>구독</dd><dt>비용</dt><dd>구독 포함</dd></dl>
+          </li>
+        </ul>
+        <p class="vacancy">비는 자리는 병목이 확인될 때만 채운다</p>
+      </div>
+    </section>
+
+    <!-- 3. 일하는 방식 -->
+    <section id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <h2 id="how-title"><span class="num">03</span>일하는 방식</h2>
+        <ol class="flow" aria-label="칸반 흐름">
+          <li>접수</li><li class="arrow" aria-hidden="true">→</li>
+          <li>수집 중</li><li class="arrow" aria-hidden="true">→</li>
+          <li>작성 중</li><li class="arrow" aria-hidden="true">→</li>
+          <li>검수</li><li class="arrow" aria-hidden="true">→</li>
+          <li class="lock">승인(잠금)</li><li class="arrow" aria-hidden="true">→</li>
+          <li class="done">완료</li>
+        </ol>
+        <ul class="principles">
+          <li>사용자는 배달원이 아니다</li>
+          <li>만든 사람과 검수자는 분리한다</li>
+          <li>승인은 사람이 잠근다</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4. 지금까지의 기록 -->
+    <section id="log" aria-labelledby="log-title">
+      <div class="wrap">
+        <h2 id="log-title"><span class="num">04</span>지금까지의 기록</h2>
+        <ol class="timeline">
+          <li>작업환경 구축</li>
+          <li>헤르메스 합류와 텔레그램 관제실 개설</li>
+          <li>제미나이 수집 연결</li>
+          <li>이고라이트 특파 시험 합격</li>
+          <li>인계 다리 완성<span class="note">방 주문이 현장으로 자동 인계</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. 목적 -->
+    <section id="goals" aria-labelledby="goals-title">
+      <div class="wrap">
+        <h2 id="goals-title"><span class="num">05</span>목적</h2>
+        <ul class="goals">
+          <li>홈페이지·프로그램 제작</li>
+          <li>앱 개발</li>
+          <li>SNS 자동화</li>
+          <li>레퍼런스 수집</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">운영: 완</div>
+  </footer>
+
+</body>
+</html>
